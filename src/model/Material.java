@@ -11,6 +11,13 @@ public class Material {
     public Material() {
     }
 
+    public Material(Material material){
+        this.materialId = material.getMaterialId();
+        this.name = material.getName();
+        this.quantityInStock = material.getQuantityInStock();
+        this.unitPricePerGram = material.getUnitPricePerGram();
+    }
+
     public String getMaterialId() {
         return materialId;
     }
