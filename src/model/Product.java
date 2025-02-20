@@ -9,6 +9,7 @@ public class Product {
     private double weight;
     private ProductCategory category;
     private double price;
+    private double cost;
     private int stockQuantity;
     private double minutesToMake;
 
@@ -16,12 +17,14 @@ public class Product {
     }
 
     public Product(String productId, String name, double weight,
+                   double cost,
                    Material material, ProductCategory category,
                    double price, int stockQuantity, double minutesToMake) {
         this.productId = productId;
         this.name = name;
         this.weight = weight;
         this.category = category;
+        this.cost = cost;
         this.material = material;
         this.price = price;
         this.stockQuantity = stockQuantity;
@@ -58,6 +61,14 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 
     public int getStockQuantity() {
@@ -98,7 +109,7 @@ public class Product {
                 ", Weight: " + getWeight() + ", Price: " + getPrice() +
                 ", Stock: " + getStockQuantity() +
                 "\n Material: " + getMaterial() + ", Category: " + getCategory() +
-                "Time to make: " + getMinutesToMake() + "minutes";
+                "Time to make: " + getMinutesToMake() + "minutes" + "Cost: " + getCost();
     }
 
     @Override
@@ -113,12 +124,14 @@ public class Product {
                 && Objects.equals(getStockQuantity(), that.getStockQuantity())
                 && Objects.equals(getMinutesToMake(), that.getMinutesToMake())
                 && Objects.equals(getCategory(),that.getCategory())
-                && Objects.equals(getMaterial(),that.getMaterial());
+                && Objects.equals(getMaterial(),that.getMaterial())
+                && Objects.equals(getCost(),that.getCost());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getName(),getProductId(),getPrice(),getWeight(),
-                getStockQuantity(),getMinutesToMake(),getCategory(),getMaterial());
+                getStockQuantity(),getCost(),getMinutesToMake(),getCategory(),
+                getMaterial());
     }
 }

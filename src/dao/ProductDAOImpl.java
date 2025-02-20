@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -14,8 +15,9 @@ public class ProductDAOImpl implements IProductDAO{
     private static final Map<String, Product> products = new HashMap<>();
 
     @Override
-    public void createProduct(Product product) {
+    public Product createProduct(Product product) {
         products.put(product.getProductId(), product);
+        return product;
     }
 
     @Override
@@ -24,10 +26,22 @@ public class ProductDAOImpl implements IProductDAO{
     }
 
     @Override
+    public Product updateProduct(String productId, Consumer<Product> updateFunction) {
+        Product product = products.get(productId);
+        updateFunction.accept(product);
+        return product;
+    }
+
+    @Override
     public Product deleteProductById(String productId) {
         Product productToReturn = products.get(productId);
         products.remove(productId);
         return productToReturn;
+    }
+
+    @Override
+    public double getCostByProductId(String productId) {
+        return products.get(productId).getCost();
     }
 
     @Override

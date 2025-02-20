@@ -13,8 +13,9 @@ public class PurchaseDAOImpl implements IPurchaseDAO{
     private static final Map<String, Purchase> purchases = new HashMap<>();
 
     @Override
-    public void recordPurchase(Purchase purchase) {
+    public Purchase recordPurchase(Purchase purchase) {
         purchases.put(purchase.getPurchaseId(), purchase);
+        return purchase;
     }
 
     @Override
@@ -23,9 +24,11 @@ public class PurchaseDAOImpl implements IPurchaseDAO{
     }
 
     @Override
-    public void updatePurchaseById(String purchaseId, Consumer<Purchase> updateFunction) {
+    public Purchase updatePurchaseById(String purchaseId,
+                                Consumer<Purchase> updateFunction) {
         Purchase purchase = purchases.get(purchaseId);
         updateFunction.accept(purchase);
+        return purchase;
     }
 
     @Override

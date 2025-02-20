@@ -2,9 +2,11 @@ package dao;
 
 import model.Provider;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -12,8 +14,9 @@ public class ProviderDAOImpl implements IProviderDAO{
     private final static Map<String, Provider> providers = new HashMap<>();
 
     @Override
-    public void addProvider(Provider provider) {
+    public Provider addProvider(Provider provider) {
         providers.put(provider.getProviderId(), provider);
+        return provider;
     }
 
     @Override
@@ -21,6 +24,12 @@ public class ProviderDAOImpl implements IProviderDAO{
         return providers.get(providerId);
     }
 
+    @Override
+    public Provider updateProvider(String providerId, Consumer<Provider> updateFunction) {
+        Provider provider = providers.get(providerId);
+        updateFunction.accept(provider);
+        return provider;
+    }
 
     @Override
     public Provider deleteProviderById(String providerId) {
@@ -39,6 +48,10 @@ public class ProviderDAOImpl implements IProviderDAO{
         return providers.get(providerId).getVAT();
     }
 
+    @Override
+    public List<Provider> getAllProviders() {
+        return new ArrayList<>(providers.values());
+    }
 
     /**
      * επιστρεφει λιστα προμηθευτων με βαση καποιο φιλτρο.

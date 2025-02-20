@@ -8,9 +8,9 @@ import java.util.function.Predicate;
 
 public interface IPurchaseDAO {
 
-    void recordPurchase(Purchase purchase);
+    Purchase recordPurchase(Purchase purchase);
     Purchase getPurchaseById(String purchaseId);
-    void updatePurchaseById(String purchaseId,
+    Purchase updatePurchaseById(String purchaseId,
                             Consumer<Purchase> updateFunction);
     Purchase deletePurchaseById(String purchaseId);
     List<Purchase> getPurchasesByFilter(Predicate<Purchase> filter);

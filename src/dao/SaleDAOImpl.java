@@ -15,8 +15,9 @@ public class SaleDAOImpl implements ISaleDAO{
     private static final Map<String, Sale> sales = new HashMap<>();
 
     @Override
-    public void recordSale(Sale sale) {
+    public Sale recordSale(Sale sale) {
         sales.put(sale.getSaleId(), sale);
+        return sale;
     }
 
     @Override
@@ -35,9 +36,10 @@ public class SaleDAOImpl implements ISaleDAO{
      *  πχ setQuantity(3) αν θελουμε να αλλαξουμε το quantity του Sale.
      */
     @Override
-    public void updateSaleById(String saleId, Consumer<Sale> updateFunction) {
+    public Sale updateSaleById(String saleId, Consumer<Sale> updateFunction) {
         Sale sale = sales.get(saleId);
         updateFunction.accept(sale);
+        return sale;
     }
 
     /**
